@@ -46,7 +46,6 @@ const renderToDom = (divId, textToRender) => {
 
 // *********  HTML COMPONENT FUNCTIONS  ********* //
 // Add Video Button / Modal
-// TODO: Update form
 const videoBtnModal = () => {
   const domString = `
     <!-- Button trigger modal -->
