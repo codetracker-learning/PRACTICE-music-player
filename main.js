@@ -55,66 +55,57 @@ const videoBtnModal = () => {
     </button>
 
     <!-- Modal -->
-  <div class="modal fade" id="add-video" tabindex="-1" aria-labelledby="add-video" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add Video</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal-body">
+    <div class="modal fade" id="add-video" tabindex="-1" aria-labelledby="add-video" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-md-down">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Video</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body">
+          <form>
+          <div class="form-floating mb-3">
+            <input class="form-control form-control-lg" type="text" placeholder="Video ID" id="videoId" aria-label="video id" required>
+            <label for="videoId">YouTube Video ID</label>
+          </div>
+      
+          <div class="form-floating mb-3">
+            <input class="form-control form-control-lg" type="text" placeholder="Title" id="title" aria-label="title" required>
+            <label for="title">Title</label>
+          </div>
+      
+          <div class="form-floating mb-3">
+            <select class="form-select form-control-lg" id="category" aria-label="category" required>
+              <option value="">Select a category</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+              <option value="music">Music</option>
+            </select>
+            <label for="category">Category</label>
+          </div>
+          
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="favorite">
+            <label class="form-check-label" for="favorite">
+              Favorite
+            </label>
+          </div>
+      
+          <button 
+            type="submit" 
+            class="btn btn-success" 
+          >
+            Submit
+          </button>
+        </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   `;
-
   renderToDom('#createBtnContainer', domString);
 };
-
-const formEl = (obj = {}) => {
-  const domString = `
-    <form id="${obj.videoId || ""}">
-    <div class="form-floating mb-3">
-      <input class="form-control form-control-lg" type="text" placeholder="Video ID" id="videoId" aria-label="video id" value="${obj.videoId || ""}" required>
-      <label for="videoId">YouTube Video ID</label>
-    </div>
-
-    <div class="form-floating mb-3">
-      <input class="form-control form-control-lg" type="text" placeholder="Title" id="title" aria-label="title" value="${obj.title || ""}" required>
-      <label for="title">Title</label>
-    </div>
-
-    <div class="form-floating mb-3">
-      <select class="form-select form-control-lg" value="${obj.category || ""}" id="category" aria-label="category" required>
-        <option value="">Select a category</option>
-        <option value="html">HTML</option>
-        <option value="css">CSS</option>
-        <option value="javascript">JavaScript</option>
-        <option value="music">Music</option>
-      </select>
-      <label for="category">Category</label>
-    </div>
-    
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" value="" id="favorite" 
-      ${obj.favorite && "checked"}
-      >
-      <label class="form-check-label" for="favorite">
-        Favorite
-      </label>
-    </div>
-
-    <button 
-      type="submit" 
-      class="btn btn-success" 
-    >
-      ${Object.keys(obj).length ? "Update" : "Submit"}
-    </button>
-  </form>
-  `
-  renderToDom("#modal-body", domString);
-}
 
 // Video component with default arg value
 const videoPlayer = (videoId = 'cNjIUSDnb9k') => {
@@ -139,7 +130,7 @@ const filterButtons = () => {
   renderToDom('#filterContainer', domString);
 };
 
-// CARDS
+// Cards
 const cardsOnDom = (array) => {
   let domString = '';
   for (const item of array) {
@@ -152,7 +143,6 @@ const cardsOnDom = (array) => {
       <h2 style="font-size: 24px; font-weight: bold; padding: 0px; margin: 0px">${item.favorite ? '⭐' : ''} ${item.title}</h2>
       <p><b>Category:</b> ${item.category.toUpperCase()}</p>
       <button class="btn btn-dark" id="watch--${item.videoId}">Watch Video</button>
-      <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-video" id="edit--${item.videoId}">Edit Video</button>
     </div>
     <div>
       <button class="btn btn-danger" id="delete--${item.videoId}">X</button>
@@ -203,11 +193,6 @@ const eventListeners = () => {
         // rerender DOM with updated data array (use the cardsOnDom function)
         cardsOnDom(data);
       }
-
-      // if edit: pass object to modal
-      if (e.target.id.includes('edit')) {
-        formEl(data[index]);
-      }
     }
   });
 
@@ -222,20 +207,11 @@ const eventListeners = () => {
       category: document.querySelector('#category').value,
       favorite: document.querySelector('#favorite').checked,
     };
-    console.log(newVideoObj)
 
-    // If the form has an ID we are updating
-    if (e.target.id) {
-      const index = data.findIndex(vid => vid.videoId === e.target.id);
-      console.log(data[index]);
-      data[index] = newVideoObj;
-      console.log(data[index]);
-    } else {
-      // push that object to the data array
-      data.push(newVideoObj);
-      // rerender cards using the cardsOnDom function and pass it the updated data array
-    }
+    // push that object to the data array
+    data.push(newVideoObj);
     
+    // rerender cards using the cardsOnDom function and pass it the updated data array
     cardsOnDom(data);
     formModal.hide()
     form.reset();
@@ -245,7 +221,6 @@ const eventListeners = () => {
 // *********  FUNCTION TO START APPLICATION  *********  //
 const startApp = () => {
   videoBtnModal();
-  formEl();
   videoPlayer();
   filterButtons();
   cardsOnDom(data);
