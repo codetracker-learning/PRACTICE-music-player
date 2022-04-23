@@ -199,7 +199,7 @@ const eventListeners = () => {
   // FORM SUBMIT
   const form = document.querySelector('form');
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // this goes in EVERY form submit to prevent page reload
     // grab the values from the form inputs and create an object
     const newVideoObj = {
       videoId: document.querySelector('#videoId').value,
