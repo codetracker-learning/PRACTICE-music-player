@@ -116,7 +116,7 @@ const videoPlayer = (videoId) => {
 
 // Filter Button Row
 const filterButtons = () => {
-  let domString = `
+  const domString = `
   <div class="d-flex flex-wrap justify-content-between my-3">
     <button class="btn btn-secondary btn-lg buttonRow" id="music">Music</button>
     <button class="btn btn-secondary btn-lg buttonRow" id="javascript">Javascript</button>
@@ -212,7 +212,7 @@ const startApp = () => {
   videoPlayer();
   filterButtons();
   cardsOnDom(data);
-  eventListeners(); // always last
+  // eventListeners(); // always last
 };
 
 startApp();
