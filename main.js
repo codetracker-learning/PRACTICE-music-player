@@ -46,7 +46,7 @@ const renderToDom = (divId, textToRender) => {
 
 // *********  HTML COMPONENT FUNCTIONS  ********* //
 // Add Video Button / Modal
-// TODO: Update form
+// https://getbootstrap.com/docs/5.0/components/modal/#live-demo
 const videoBtnModal = () => {
   const domString = `
     <!-- Button trigger modal -->
