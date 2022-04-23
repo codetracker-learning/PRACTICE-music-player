@@ -106,7 +106,8 @@ const videoBtnModal = () => {
 };
 
 // Video component with default arg value
-const videoPlayer = (videoId = 'cNjIUSDnb9k') => {
+// = 'cNjIUSDnb9k'
+const videoPlayer = (videoId) => {
   const domString = `
   <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   `;
@@ -175,6 +176,8 @@ const eventListeners = () => {
       // if watch: grab the ID and rerender the videoPlayer with that ID as an argument
       if (e.target.id.includes('watch')) {
         console.log("Pressed Watch Button")        
+        
+        
         // scroll to top of page
         document.location = '#';
       }
