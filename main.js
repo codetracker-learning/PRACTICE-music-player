@@ -45,6 +45,8 @@ const renderToDom = (divId, textToRender) => {
 };
 
 // *********  HTML COMPONENT FUNCTIONS  ********* //
+// *********  These are all built out so we can focus on the JS  ********* //
+
 // Add Video Button / Modal
 const videoBtnModal = () => {
   const domString = `
@@ -154,7 +156,8 @@ const cardsOnDom = (array) => {
 
 // *********  EVENT LISTENERS  *********  //
 const eventListeners = () => {
-  // Bootstrap for grabbing modal so can manually open and close
+  // Bootstrap for grabbing modal so can manually open and close.
+  // We will not go deeply into this. You can view the documentation if you would like to know more and as questions in the help thread.
   const formModal = new bootstrap.Modal(document.querySelector('#add-video'));
   
   // FILTER BUTTON ROW
